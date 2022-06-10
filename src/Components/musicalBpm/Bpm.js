@@ -6,7 +6,7 @@ let bpm = 0;
 let total = 0;
 let count = -1;
 
-function Bpm() {
+function Bpm(props) {
   const [curBpm, setCurBpm] = useState(0);
 
   // Calculate BPM
@@ -41,11 +41,27 @@ function Bpm() {
     setCurBpm(0);
   };
 
+  // Save list Bpm to list
+  const saveHandler = () => {
+    if (curBpm === "-" || curBpm === 0) {
+      return;
+    } else {
+      const newBpm = { id: props.list.length + 1, value: curBpm };
+      props.setList((prevList) => [...prevList, newBpm]);
+
+      // Update local storage
+      let existingList = JSON.parse(localStorage.getItem("bpmList"));
+      existingList.push(newBpm);
+
+      localStorage.setItem("bpmList", JSON.stringify(existingList));
+    }
+  };
+
   return (
     <section className={classes.calculator}>
-      <h2>Start Clicking the Button!</h2>
+      <h2>{curBpm === 0 ? "Start Clicking the Button!" : ""}</h2>
 
-      {/* BPM calculation */}
+      {/* BPM calculation output */}
       <div className={classes.valueField}>{curBpm === 0 ? "-" : curBpm}</div>
 
       <div className={classes.buttons}>
@@ -53,7 +69,9 @@ function Bpm() {
           Click Me!
         </button>
         <div>
-          <button className={classes.subBtn}>Save BPM</button>
+          <button onClick={saveHandler} className={classes.subBtn}>
+            Save BPM
+          </button>
           <button onClick={resetHandler} className={classes.subBtn}>
             Reset
           </button>

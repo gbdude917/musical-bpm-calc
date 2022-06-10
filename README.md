@@ -1,1 +1,1 @@
-# Musicaal BPM Calculator
+# Musical BPM Calculator
