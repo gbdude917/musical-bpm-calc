@@ -1,4 +1,3 @@
-import { useState } from "react";
 import BpmItem from "./BpmItem";
 import Card from "../UI/Card";
 import classes from "./SavedBpmList.module.css";
@@ -10,9 +9,6 @@ function SavedBpmList(props) {
 
     const name =
       e.currentTarget.parentElement.parentElement.getAttribute("name");
-
-    // Remove from list
-    // props.setList(props.list.filter((item) => item.value !== +name));
 
     // Remove from localStorage
     let updatedList = props.list.filter((item) => item.value !== +name);

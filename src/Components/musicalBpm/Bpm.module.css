@@ -61,3 +61,13 @@
 .subBtn:hover {
   cursor: pointer;
 }
+
+@media only screen and (max-width: 479px) {
+  .calculator h2 {
+    display: none;
+  }
+
+  .valueField {
+    padding-top: 50px;
+  }
+}
